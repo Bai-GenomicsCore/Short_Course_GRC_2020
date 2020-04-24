@@ -1,3 +1,8 @@
+##########################################################################################################
+# Session 1: Bioinformatics in R with an example in RNA-Seq downstream visualization and functional analysis
+# Date: April 23, 2020
+# Instructor: Yang Bai
+##########################################################################################################
 ## use base R to draw heatmap
 # Generate a matrix of 20 columns and 20 rows with normally distributed random values.
 set.seed(1234)                                                     # Set seed for reproducibility
@@ -75,5 +80,8 @@ pathview(gene.data =FC, pathway.id = "hsa00140", species = "hsa", limit = list(g
 # view all kegg pathways
 for ( kegg_id in kegg$ID) { pathview(gene.data =FC, pathway.id = kegg_id, species = "hsa", limit = list(gene=5, cpd=1)) }
 
-
-
+## draw heatmap from example dataset using stats
+df <- read.delim("Decoy_human_RNASeq_DEG_grp2.tab", header=T)
+data <- df %>% dplyr::select(FPKM_C1_R1:FPKM_T2_R3)
+data <- as.matrix(data)
+stats::heatmap(data)     # write the function with its package name to avoid conflict with other packages loaded. 
